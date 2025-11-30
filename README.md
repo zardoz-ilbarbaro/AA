@@ -1,2 +1,2 @@
 # AA
-arch linux + alis ISO
+arch linux + alis ISO from Erik Dubois idea
