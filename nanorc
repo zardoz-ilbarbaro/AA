@@ -301,8 +301,8 @@ include "/usr/share/nano/*.nanorc"
 #bind ^D findprevious all
 #bind ^R replace main
 #bind ^X cut main
-#bind ^C copy main
-#bind ^V paste all
+bind ^C copy main
+bind ^V paste all
 #bind ^P location main
 #bind ^E execute main
 #bind ^A mark main
