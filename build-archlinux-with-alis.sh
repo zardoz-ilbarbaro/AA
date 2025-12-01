@@ -132,7 +132,7 @@ echo
 	echo
 	echo "Git clone AA"
 	mkdir $buildFolder/archiso/airootfs/alis
-	git clone https://github.com/zardoz-ilbarbaro/AA $buildFolder/archiso/airootfs/alis
+	git clone https://github.com/zardoz-ilbarbaro/alis $buildFolder/archiso/airootfs/alis
 
 echo
 echo "################################################################## "
