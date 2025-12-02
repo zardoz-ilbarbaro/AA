@@ -1,7 +1,15 @@
 #!/bin/bash
 #set -e
 ##################################################################################################################
-# Author 	: zardoz-ilbarbaro
+# Author 	: Erik Dubois
+# Website   : https://www.erikdubois.be
+# Website   : https://www.alci.online
+# Website	: https://www.arcolinux.info
+# Website	: https://www.arcolinux.com
+# Website	: https://www.arcolinuxd.com
+# Website	: https://www.arcolinuxb.com
+# Website	: https://www.arcolinuxiso.com
+# Website	: https://www.arcolinuxforum.com
 ##################################################################################################################
 #
 #   DO NOT JUST RUN THIS. EXAMINE AND JUDGE. RUN AT YOUR OWN RISK.
@@ -81,7 +89,14 @@ echo
 	else
 
 		#checking which helper is installed
-		if pacman -Qi paru &> /dev/null; then
+		if pacman -Qi yay &> /dev/null; then
+
+			echo "################################################################"
+			echo "######### Installing with yay"
+			echo "################################################################"
+			yay -S --noconfirm $package
+
+		elif pacman -Qi paru &> /dev/null; then
 
 			echo "################################################################"
 			echo "######### Installing with paru"
@@ -130,9 +145,10 @@ echo
 	mkdir $buildFolder
 	cp -r /usr/share/archiso/configs/releng/ $buildFolder/archiso
 	echo
-	echo "Git clone AA"
+	echo "Git clone ALIS Area"
 	mkdir $buildFolder/archiso/airootfs/alis
 	git clone https://github.com/zardoz-ilbarbaro/alis $buildFolder/archiso/airootfs/alis
+
 
 echo
 echo "################################################################## "
@@ -151,12 +167,18 @@ echo
 echo "################################################################## "
 tput setaf 2
 echo "Phase 5 : "
+echo "- Adding time to /etc/dev-rel"
 echo "- profile.def"
 echo "- nanorc for syntax"
 echo "- alis script"
 tput sgr0
 echo "################################################################## "
 echo
+
+	echo "Adding time to /etc/dev-rel"
+	date_build=$(date -d now)
+	touch $buildFolder/archiso/airootfs/etc/dev-rel
+	echo "Arch Linux iso build on : "$date_build | tee -a $buildFolder/archiso/airootfs/etc/dev-rel
 
 	FIND='livecd-sound'
 	REPLACE='  ["/alis/start.sh"]="0:0:755"'
@@ -172,6 +194,7 @@ echo
 	FIND='livecd-sound'
 	REPLACE='  ["/usr/bin/alis"]="0:0:755"'
 	find $buildFolder/archiso/profiledef.sh -type f -exec sed -i "/$FIND/a $REPLACE" {} \;
+
 
 #echo
 #echo "################################################################## "
